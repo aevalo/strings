@@ -1,0 +1,14 @@
+[package]
+name = "strings"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "getenv-sys"
+path = "src/getenv-sys.rs"
+
+[[bin]]
+name = "list-cwd"
+path = "src/list-cwd.rs"
+
+[dependencies]
