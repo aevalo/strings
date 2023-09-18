@@ -11,4 +11,38 @@ path = "src/getenv-sys.rs"
 name = "list-cwd"
 path = "src/list-cwd.rs"
 
+[[bin]]
+name = "print-file"
+path = "src/print-file.rs"
+
+[[bin]]
+name = "simple"
+path = "src/simple.rs"
+
+[[bin]]
+name = "rc-strings"
+path = "src/rc-strings.rs"
+
+[[bin]]
+name = "arc-strings"
+path = "src/arc-strings.rs"
+
+[[bin]]
+name = "latin1-string"
+path = "src/latin1-string.rs"
+
+[[bin]]
+name = "literals"
+path = "src/literals.rs"
+
+[[bin]]
+name = "specialized-strings"
+path = "src/specialized-strings.rs"
+
+[package.metadata.commands]
+fmt-check = "$CARGO fmt --check --verbose"
+fmt-fix = "$CARGO fmt --verbose"
+
 [dependencies]
+encoding = "0.2"
+regex = "1.9.5"

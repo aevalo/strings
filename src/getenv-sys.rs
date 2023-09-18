@@ -1,9 +1,10 @@
 use std::ffi::{CStr, CString};
-use std::str::Utf8Error;
 use std::option::Option;
+use std::os::raw::c_char;
+use std::str::Utf8Error;
 
 extern "C" {
-    fn getenv(name: *const std::os::raw::c_char) -> *const std::os::raw::c_char;
+    fn getenv(name: *const c_char) -> *const c_char;
 }
 
 fn getenv_sys(name: &str) -> Result<Option<&str>, Utf8Error> {
@@ -16,7 +17,7 @@ fn getenv_sys(name: &str) -> Result<Option<&str>, Utf8Error> {
             let c_str = CStr::from_ptr(val);
             match c_str.to_str() {
                 Ok(str) => Ok(Some(str)),
-                Err(err) => Err(err)
+                Err(err) => Err(err),
             }
         }
     }
@@ -25,16 +26,16 @@ fn getenv_sys(name: &str) -> Result<Option<&str>, Utf8Error> {
 fn main() {
     match getenv_sys("PATH") {
         Ok(maybe_value) => match maybe_value {
-            Some(value) => println!("Found: {}", value),
-            None => println!("Not found")
+            Some(value) => println!("Found: {value}"),
+            None => println!("Not found"),
         },
-        Err(err) => println!("String conversion error: {}", err)
+        Err(err) => println!("String conversion error: {err}"),
     }
     match getenv_sys("FOO") {
         Ok(maybe_value) => match maybe_value {
-            Some(value) => println!("Found: {}", value),
-            None => println!("Not found")
+            Some(value) => println!("Found: {value}"),
+            None => println!("Not found"),
         },
-        Err(err) => println!("String conversion error: {}", err)
+        Err(err) => println!("String conversion error: {err}"),
     }
 }
